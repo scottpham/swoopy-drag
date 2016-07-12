@@ -142,7 +142,7 @@ d3.swoopyDrag = function(){
     //calc radius of circle
     var K = .5*A*B*Math.sin(angle)
     var r = A*B*C/4/K
-    r = Math.round(r*1000)/1000
+    r = round(r)
 
     //large arc flag
     var laf = +(Math.PI/2 > angle)
@@ -150,7 +150,9 @@ d3.swoopyDrag = function(){
     //sweep flag
     var saf = +((b[0] - a[0])*(c[1] - a[1]) - (b[1] - a[1])*(c[0] - a[0]) < 0) 
 
-    return ['M', a, 'A', r, r, 0, laf, saf, b].join(' ')
+    return ['M', a.map(round), 'A', r, r, 0, laf, saf, b.map(round)].join(' ')
+
+    function round(d){ return Math.round(d*1000)/1000 }
   }
 
   function dist(a, b){
